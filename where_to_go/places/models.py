@@ -10,3 +10,12 @@ class Place(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Image(models.Model):
+    order = models.IntegerField()
+    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    image = models.ImageField()
+
+    def __str__(self):
+        return f'{self.order} {self.place.title}'
