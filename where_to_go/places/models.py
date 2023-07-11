@@ -14,7 +14,9 @@ class Place(models.Model):
 
 class Image(models.Model):
     order = models.IntegerField()
-    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    place = models.ForeignKey(
+        Place, on_delete=models.CASCADE, related_name='images'
+    )
     image = models.ImageField()
 
     def __str__(self):
