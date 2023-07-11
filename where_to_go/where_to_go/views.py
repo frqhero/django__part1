@@ -2,7 +2,7 @@ import json
 
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, reverse
 
 from places.models import Place
 
@@ -18,9 +18,10 @@ def get_moscow_legends_object():
         'properties': {
             'title': moscow_legends.title,
             'placeId': 'moscow_legends',
-            'detailsUrl': 'https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/moscow_legends.json',
+            'detailsUrl': reverse('show_place', kwargs={'place_id': moscow_legends.id}),
         },
     }
+    address = reverse('show_place', kwargs={'place_id': 1})
     return moscow_legends_object
 
 
@@ -35,7 +36,7 @@ def get_roofs_object():
         'properties': {
             'title': roofs.title,
             'placeId': 'roofs24',
-            'detailsUrl': 'https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/moscow_legends.json',
+            'detailsUrl': reverse('show_place', kwargs={'place_id': roofs.id}),
         },
     }
     return roofs_object
