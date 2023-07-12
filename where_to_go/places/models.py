@@ -13,7 +13,14 @@ class Place(models.Model):
 
 
 class Image(models.Model):
-    order = models.IntegerField()
+    class Meta:
+        ordering = ['order']
+
+    order = models.IntegerField(
+        default=0,
+        blank=False,
+        null=False,
+    )
     place = models.ForeignKey(
         Place, on_delete=models.CASCADE, related_name='images'
     )
