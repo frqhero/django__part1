@@ -22,3 +22,6 @@ Test data to enter can be found [here](https://raw.githubusercontent.com/devmano
 To access the admin page, you need to follow additional steps:
 1. Create super user `./manage.py createsuperuser`
 2. Go `/admin` address (e.g. http://127.0.0.1:8000/admin) in browser
+
+## Deployment
+Here is you can check the deployed product -> [WHERE TO GO](https://frqhero.pythonanywhere.com/)
