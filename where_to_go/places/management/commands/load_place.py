@@ -38,9 +38,6 @@ class Command(BaseCommand):
             img_model.place = place
             img_model.order = count
             img_model.save()
-            1
-
-        1
 
     def add_arguments(self, parser):
         parser.add_argument(nargs='+', type=str, dest='args')
