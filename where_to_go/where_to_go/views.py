@@ -1,53 +1,33 @@
 import json
 
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import get_object_or_404, reverse
 
 from places.models import Place
 
 
-def get_moscow_legends_object():
-    moscow_legends = Place.objects.get(title__contains='Легенды')
-    moscow_legends_object = {
+def get_geo_object(db_entry):
+    geo_object = {
         'type': 'Feature',
         'geometry': {
             'type': 'Point',
-            'coordinates': [moscow_legends.longitude, moscow_legends.latitude],
+            'coordinates': [db_entry.longitude, db_entry.latitude],
         },
         'properties': {
-            'title': moscow_legends.title,
-            'placeId': 'moscow_legends',
-            'detailsUrl': reverse('show_place', kwargs={'place_id': moscow_legends.id}),
-        },
-    }
-    address = reverse('show_place', kwargs={'place_id': 1})
-    return moscow_legends_object
-
-
-def get_roofs_object():
-    roofs = Place.objects.get(title__contains='Крыши')
-    roofs_object = {
-        'type': 'Feature',
-        'geometry': {
-            'type': 'Point',
-            'coordinates': [roofs.longitude, roofs.latitude],
-        },
-        'properties': {
-            'title': roofs.title,
+            'title': db_entry.title,
             'placeId': 'roofs24',
-            'detailsUrl': reverse('show_place', kwargs={'place_id': roofs.id}),
+            'detailsUrl': reverse('show_place', kwargs={'place_id': db_entry.id}),
         },
     }
-    return roofs_object
+    return geo_object
 
 
 def get_geo_json():
-    moscow_legends_object = get_moscow_legends_object()
-    roofs_object = get_roofs_object()
+    features = [get_geo_object(place) for place in Place.objects.all()]
     geo_json = {
         'type': 'FeatureCollection',
-        'features': [moscow_legends_object, roofs_object],
+        'features': features,
     }
     return geo_json
 
