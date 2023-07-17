@@ -21,17 +21,12 @@ def get_geo_object(db_entry):
     return geo_object
 
 
-def get_geo_json():
+def show_index(request):
     features = [get_geo_object(place) for place in Place.objects.all()]
     geo_json = {
         'type': 'FeatureCollection',
         'features': features,
     }
-    return geo_json
-
-
-def show_index(request):
-    geo_json = get_geo_json()
     context = {'geo_json': geo_json}
     return render(request, 'index.html', context=context)
 
