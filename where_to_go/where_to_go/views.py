@@ -15,7 +15,6 @@ def get_geo_object(db_entry):
         },
         'properties': {
             'title': db_entry.title,
-            'placeId': 'roofs24',
             'detailsUrl': reverse('show_place', kwargs={'place_id': db_entry.id}),
         },
     }
