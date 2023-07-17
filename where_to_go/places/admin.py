@@ -10,8 +10,11 @@ class ImageTabularInline(SortableTabularInline):
     readonly_fields = ['get_image']
 
     def get_image(self, obj):
+        max_height = 200
         return format_html(
-            f'<img src="{obj.image.url}" style="max-height:200px" />'
+            '<img src="{}" style="max-height:{}px" />',
+            obj.image.url,
+            max_height
         )
 
 
