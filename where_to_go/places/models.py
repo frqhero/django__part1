@@ -17,11 +17,7 @@ class Image(models.Model):
     class Meta:
         ordering = ['order']
 
-    order = models.IntegerField(
-        default=0,
-        blank=False,
-        null=False,
-    )
+    order = models.IntegerField(default=0)
     place = models.ForeignKey(
         Place,
         on_delete=models.CASCADE,
