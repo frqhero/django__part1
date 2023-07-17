@@ -1,8 +1,7 @@
 import json
 
 from django.http import HttpResponse
-from django.template import loader
-from django.shortcuts import get_object_or_404, reverse
+from django.shortcuts import get_object_or_404, reverse, render
 
 from places.models import Place
 
@@ -33,11 +32,9 @@ def get_geo_json():
 
 
 def show_index(request):
-    template = loader.get_template('index.html')
     geo_json = get_geo_json()
     context = {'geo_json': geo_json}
-    rendered_page = template.render(context, request)
-    return HttpResponse(rendered_page)
+    return render(request, 'index.html', context=context)
 
 
 def show_place(request, place_id):
