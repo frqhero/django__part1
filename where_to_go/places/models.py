@@ -23,7 +23,9 @@ class Image(models.Model):
         null=False,
     )
     place = models.ForeignKey(
-        Place, on_delete=models.CASCADE, related_name='images'
+        Place,
+        on_delete=models.CASCADE,
+        related_name='images'
     )
     image = models.ImageField()
 
