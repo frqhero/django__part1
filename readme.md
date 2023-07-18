@@ -12,7 +12,7 @@ Test data to enter can be found [here](https://raw.githubusercontent.com/devmano
    * env vars  
      * `DEBUG` - `False` is the default value  
      * `ALLOWED_HOSTS` - list (e.g. *,localhost,website.ru) If `DEBUG` is set to false, this option is required. `[]` is the default value. 
-     * `SECRET_KEY` - `REPLACE_ME` is the default value.
+     * `SECRET_KEY` - required.
 6. Apply migrations/create db
    * `./manage.py migrate`
 7. Run 
