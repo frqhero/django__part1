@@ -23,11 +23,11 @@ def get_geo_object(db_entry):
 
 def show_index(request):
     features = [get_geo_object(place) for place in Place.objects.all()]
-    geo_json = {
+    geo_spots = {
         'type': 'FeatureCollection',
         'features': features,
     }
-    context = {'geo_json': geo_json}
+    context = {'geo_spots': geo_spots}
     return render(request, 'index.html', context=context)
 
 
