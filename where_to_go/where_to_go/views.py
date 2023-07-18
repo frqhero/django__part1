@@ -1,6 +1,6 @@
 import json
 
-from django.http import HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, reverse, render
 
 from places.models import Place
@@ -15,7 +15,9 @@ def get_geo_object(db_entry):
         },
         'properties': {
             'title': db_entry.title,
-            'detailsUrl': reverse('show_place', kwargs={'place_id': db_entry.id}),
+            'detailsUrl': reverse(
+                'show_place', kwargs={'place_id': db_entry.id}
+            ),
         },
     }
     return geo_object
@@ -44,7 +46,10 @@ def show_place(request, place_id):
             'lng': place.longitude,
         },
     }
-    return HttpResponse(
-        json.dumps(response, ensure_ascii=False, indent=2),
-        content_type='application/json',
+    return JsonResponse(
+        response,
+        json_dumps_params={
+            'indent': 2,
+            'ensure_ascii': False,
+        },
     )
