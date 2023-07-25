@@ -16,7 +16,9 @@ def remove_places_images(queryset):
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        response = requests.get(args[0]).json()
+        response = requests.get(args[0])
+        response.raise_for_status()
+        response = response.json()
         place, created = Place.objects.get_or_create(
             title=response['title'],
             defaults={
